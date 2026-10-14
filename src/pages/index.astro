@@ -1,0 +1,283 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { profile, bio, callout, interests } from '../data/profile';
+import { publications, me } from '../data/publications';
+import { experience } from '../data/experience';
+import { education, news, honors, service } from '../data/misc';
+
+const selectedCount = publications.filter((p) => p.selected).length;
+const hasMore = selectedCount > 0 && selectedCount < publications.length;
+const hasEqualContrib = publications.some((p) => p.authors.some((a) => a.endsWith('*')));
+
+const linkLabels = { paper: 'Paper', arxiv: 'arXiv', code: 'Code', project: 'Project', bibtex: 'BibTeX' } as const;
+
+const initials = profile.name
+  .split(' ')
+  .map((w) => w[0])
+  .join('');
+
+const nav = [
+  { href: '#research', label: 'Research' },
+  { href: '#publications', label: 'Publications' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#education', label: 'Education' },
+];
+
+const updated = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+---
+
+<Base>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="topbar__name" href="#top">{profile.name}</a>
+      <nav aria-label="Sections">
+        <ul class="topbar__nav">
+          {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+          {profile.cv && <li><a href={profile.cv}>CV</a></li>}
+        </ul>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <span class="theme-toggle__sun"><Icon name="sun" /></span>
+        <span class="theme-toggle__moon"><Icon name="moon" /></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <!-- Intro -->
+    <section id="top" class="hero" aria-labelledby="name">
+      <div class="hero__text">
+        <h1 id="name" class="hero__name">{profile.name}</h1>
+        <p class="hero__role">
+          {profile.position}<br />
+          <a href={profile.affiliationUrl}>{profile.affiliation}</a>
+        </p>
+        <p class="hero__advisor">
+          Advised by <a href={profile.advisor.url}>Prof. {profile.advisor.name}</a>
+        </p>
+
+        <div class="hero__bio">
+          {bio.map((p) => <p set:html={p} />)}
+        </div>
+
+        {callout && <p class="hero__callout">{callout}</p>}
+
+        <ul class="links" aria-label="Contact and profiles">
+          <li>
+            <a href={`mailto:${profile.links.email}`}><Icon name="email" /><span>{profile.links.email}</span></a>
+          </li>
+          <li><a href={profile.links.scholar}><Icon name="scholar" /><span>Scholar</span></a></li>
+          <li><a href={profile.links.github}><Icon name="github" /><span>GitHub</span></a></li>
+          <li><a href={profile.links.linkedin}><Icon name="linkedin" /><span>LinkedIn</span></a></li>
+          <li>
+            {profile.cv ? (
+              <a class="links__primary" href={profile.cv}><Icon name="cv" /><span>CV</span></a>
+            ) : (
+              <span class="links__pending" aria-disabled="true" title="Public CV coming soon">
+                <Icon name="cv" /><span>CV (soon)</span>
+              </span>
+            )}
+          </li>
+        </ul>
+      </div>
+
+      <div class="hero__photo">
+        {profile.photo ? (
+          <img src={profile.photo} alt={`Portrait of ${profile.name}`} width="480" height="480" />
+        ) : (
+          <div class="hero__monogram" role="img" aria-label="Photo placeholder">{initials}</div>
+        )}
+      </div>
+    </section>
+
+    <!-- Research interests -->
+    <section id="research" class="section" aria-labelledby="research-h">
+      <h2 id="research-h" class="section__title">Research</h2>
+      <div class="section__body">
+        <ol class="interests">
+          {interests.map((it) => (
+            <li>
+              <h3>{it.title}</h3>
+              <p>{it.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- News -->
+    {news.length > 0 && (
+      <section id="news" class="section" aria-labelledby="news-h">
+        <h2 id="news-h" class="section__title">News</h2>
+        <div class="section__body">
+          <ul class="news">
+            {news.map((n) => (
+              <li>
+                <span class="news__date">{n.date}</span>
+                <span set:html={n.text} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )}
+
+    <!-- Publications -->
+    <section id="publications" class="section" aria-labelledby="pubs-h">
+      <h2 id="pubs-h" class="section__title">Publications</h2>
+      <div class="section__body">
+        <ol class="pubs" data-expanded={hasMore ? 'false' : 'true'}>
+          {publications.map((p) => (
+            <li class:list={['pub', { 'pub--more': hasMore && !p.selected }]}>
+              <div class="pub__venue">
+                <span class:list={['tag', `tag--${p.status}`]} title={p.venueFull ?? p.venue}>{p.venue}</span>
+              </div>
+              <div class="pub__main">
+                <h3 class="pub__title">
+                  {p.links?.paper || p.links?.arxiv ? <a href={p.links.paper || p.links.arxiv}>{p.title}</a> : p.title}
+                </h3>
+                <p class="pub__authors">
+                  {p.authors.map((a, i) => (
+                    <>
+                      {a.replace('*', '') === me ? <strong class="me">{a}</strong> : <span>{a}</span>}
+                      {i < p.authors.length - 1 && ', '}
+                    </>
+                  ))}
+                </p>
+                {p.note && <p class="pub__note">{p.note}</p>}
+                {p.links && Object.values(p.links).some(Boolean) && (
+                  <p class="pub__links">
+                    {(Object.keys(linkLabels) as (keyof typeof linkLabels)[])
+                      .filter((k) => p.links?.[k])
+                      .map((k) => (
+                        <a href={p.links![k]}>
+                          {linkLabels[k]}
+                          <Icon name="arrow" size={13} />
+                        </a>
+                      ))}
+                  </p>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+        <div class="pubs__footer">
+          {hasMore && (
+            <button class="pubs__toggle" type="button" aria-expanded="false">
+              Show all {publications.length} papers
+            </button>
+          )}
+          {hasEqualContrib && <span class="pubs__legend">* Equal contribution</span>}
+          <a class="pubs__scholar" href={profile.links.scholar}>Google Scholar <Icon name="arrow" size={13} /></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="section" aria-labelledby="exp-h">
+      <h2 id="exp-h" class="section__title">Experience</h2>
+      <div class="section__body">
+        <ol class="timeline">
+          {experience.map((e) => (
+            <li class="timeline__item">
+              <div class="timeline__meta">
+                <span class="timeline__dates">{e.dates}</span>
+                {e.location && <span class="timeline__loc">{e.location}</span>}
+              </div>
+              <div class="timeline__main">
+                <h3 class="timeline__org">
+                  {e.url ? <a href={e.url}>{e.org}</a> : e.org}
+                  <span class:list={['kind', `kind--${e.kind.toLowerCase()}`]}>{e.kind}</span>
+                </h3>
+                <p class="timeline__role">{e.role}</p>
+                <p class="timeline__summary">{e.summary}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="section" aria-labelledby="edu-h">
+      <h2 id="edu-h" class="section__title">Education</h2>
+      <div class="section__body">
+        <ol class="timeline">
+          {education.map((e) => (
+            <li class="timeline__item">
+              <div class="timeline__meta">
+                <span class="timeline__dates">{e.dates}</span>
+              </div>
+              <div class="timeline__main">
+                <h3 class="timeline__org">{e.school}</h3>
+                <p class="timeline__role">{e.degree}</p>
+                {e.detail && <p class="timeline__summary">{e.detail}</p>}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- Honors & service -->
+    <section id="honors" class="section" aria-labelledby="honors-h">
+      <h2 id="honors-h" class="section__title">Honors &amp; Service</h2>
+      <div class="section__body">
+        <ul class="news">
+          {honors.map((h) => (
+            <li>
+              <span class="news__date">{h.year}</span>
+              <span>{h.text}</span>
+            </li>
+          ))}
+          {service.map((s) => (
+            <li>
+              <span class="news__date">Service</span>
+              <span>{s}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer container">
+    <p>© {new Date().getFullYear()} {profile.name} · Last updated {updated}</p>
+    <p>
+      <a href={`mailto:${profile.links.email}`}>Email</a>
+      <a href={profile.links.scholar}>Scholar</a>
+      <a href={profile.links.github}>GitHub</a>
+      <a href={profile.links.linkedin}>LinkedIn</a>
+    </p>
+  </footer>
+
+  <script>
+    // Theme toggle: an explicit choice overrides the OS preference and is remembered.
+    const root = document.documentElement;
+    const toggle = document.querySelector<HTMLButtonElement>('.theme-toggle');
+    const isDark = () =>
+      root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    const sync = () => toggle?.setAttribute('aria-pressed', String(isDark()));
+    sync();
+    toggle?.addEventListener('click', () => {
+      const next = isDark() ? 'light' : 'dark';
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem('theme', next);
+      } catch {}
+      sync();
+    });
+
+    // Publications: show selected first, expand to all.
+    const list = document.querySelector<HTMLElement>('.pubs');
+    const more = document.querySelector<HTMLButtonElement>('.pubs__toggle');
+    const total = list?.querySelectorAll('.pub').length ?? 0;
+    more?.addEventListener('click', () => {
+      const expanded = list?.dataset.expanded === 'true';
+      if (list) list.dataset.expanded = String(!expanded);
+      more.setAttribute('aria-expanded', String(!expanded));
+      more.textContent = expanded ? `Show all ${total} papers` : 'Show selected only';
+    });
+  </script>
+</Base>
