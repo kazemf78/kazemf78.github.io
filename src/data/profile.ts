@@ -13,8 +13,7 @@ export const profile = {
     'Kazem Faghih is a Computer Science PhD student at the University of Maryland, College Park, working on LLM evaluation, reliability, and agentic AI.',
 
   // Path under /public. Leave empty ('') to show the monogram placeholder.
-  // TODO: add a professional photo at public/images/profile.jpg (square, ≥ 600×600).
-  photo: '',
+  photo: '/images/profile.jpg',
 
   // Path under /public (e.g. '/cv.pdf') or a full URL. While empty, the CV button
   // shows as a "coming soon" placeholder.

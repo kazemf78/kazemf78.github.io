@@ -84,7 +84,7 @@ const updated = new Date().toLocaleDateString('en-US', { month: 'long', year: 'n
 
       <div class="hero__photo">
         {profile.photo ? (
-          <img src={profile.photo} alt={`Portrait of ${profile.name}`} width="480" height="480" />
+          <img src={profile.photo} alt={`Portrait of ${profile.name}`} width="720" height="720" decoding="async" fetchpriority="high" />
         ) : (
           <div class="hero__monogram" role="img" aria-label="Photo placeholder">{initials}</div>
         )}
