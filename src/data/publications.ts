@@ -23,6 +23,16 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
+    title:
+      'Revealing What Benchmark Scores Hide: Jointly Measuring the Breadth and Reliability of LLM Capabilities Using Accessibility Profiles',
+    authors: ['K Faghih', 'Y Cheng', 'S Saha', 'M Pournemat', 'A Gerami', 'S Feizi'],
+    venue: 'arXiv',
+    year: 2026,
+    status: 'preprint',
+    selected: true,
+    // TODO: add the arXiv link, e.g. links: { arxiv: 'https://arxiv.org/abs/XXXX.XXXXX' },
+  },
+  {
     title: 'Under the Hood of SKILL.md: Semantic Supply-Chain Attacks on AI Agent Skill Registry',
     authors: ['S Saha', 'K Faghih', 'S Feizi'],
     venue: 'arXiv',
@@ -36,7 +46,6 @@ export const publications: Publication[] = [
     venue: 'arXiv',
     year: 2026,
     status: 'preprint',
-    selected: true,
     links: { arxiv: 'https://arxiv.org/abs/2607.22554' },
   },
   {

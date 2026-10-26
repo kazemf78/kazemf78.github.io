@@ -25,6 +25,9 @@ export const profile = {
     scholar: 'https://scholar.google.com/citations?user=57pBrCcAAAAJ',
     github: 'https://github.com/kazemf78',
     linkedin: 'https://www.linkedin.com/in/kazem-faghih/',
+    // X / Twitter profile URL. Hidden while empty.
+    // TODO: add your X/Twitter URL, e.g. 'https://x.com/<handle>'.
+    x: '',
   },
 };
 

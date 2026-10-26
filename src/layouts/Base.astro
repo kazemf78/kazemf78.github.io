@@ -23,7 +23,7 @@ const jsonLd = {
   jobTitle: profile.position,
   affiliation: { '@type': 'CollegeOrUniversity', name: profile.affiliation },
   alumniOf: [{ '@type': 'CollegeOrUniversity', name: 'Sharif University of Technology' }],
-  sameAs: [profile.links.scholar, profile.links.github, profile.links.linkedin],
+  sameAs: [profile.links.scholar, profile.links.github, profile.links.linkedin, profile.links.x].filter(Boolean),
   knowsAbout: ['Large language models', 'LLM evaluation', 'AI agents', 'Tool use', 'Machine learning'],
 };
 ---

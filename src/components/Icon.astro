@@ -1,7 +1,7 @@
 ---
 // Small inline icon set (no icon library dependency).
 interface Props {
-  name: 'email' | 'scholar' | 'github' | 'linkedin' | 'cv' | 'sun' | 'moon' | 'arrow';
+  name: 'email' | 'scholar' | 'github' | 'linkedin' | 'x' | 'cv' | 'sun' | 'moon' | 'arrow';
   size?: number;
 }
 const { name, size = 18 } = Astro.props;
@@ -14,8 +14,8 @@ const { name, size = 18 } = Astro.props;
   aria-hidden="true"
   focusable="false"
   class="icon"
-  fill={name === 'github' || name === 'scholar' || name === 'linkedin' ? 'currentColor' : 'none'}
-  stroke={name === 'github' || name === 'scholar' || name === 'linkedin' ? 'none' : 'currentColor'}
+  fill={['github', 'scholar', 'linkedin', 'x'].includes(name) ? 'currentColor' : 'none'}
+  stroke={['github', 'scholar', 'linkedin', 'x'].includes(name) ? 'none' : 'currentColor'}
   stroke-width="1.7"
   stroke-linecap="round"
   stroke-linejoin="round"
@@ -34,6 +34,9 @@ const { name, size = 18 } = Astro.props;
   )}
   {name === 'linkedin' && (
     <path d="M20.4 3H3.6C3.3 3 3 3.3 3 3.6v16.8c0 .3.3.6.6.6h16.8c.3 0 .6-.3.6-.6V3.6c0-.3-.3-.6-.6-.6ZM8.3 18.3H5.7V9.8h2.6v8.5ZM7 8.6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm11.3 9.7h-2.6v-4.1c0-1 0-2.3-1.4-2.3s-1.6 1.1-1.6 2.2v4.2H10V9.8h2.5V11c.4-.7 1.2-1.4 2.5-1.4 2.7 0 3.2 1.8 3.2 4.1v4.6Z" />
+  )}
+  {name === 'x' && (
+    <path d="M17.8 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.3L2 3h6.4l4.4 5.8L17.8 3Zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5Z" />
   )}
   {name === 'cv' && (
     <>

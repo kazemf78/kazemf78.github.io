@@ -321,6 +321,12 @@ strong {
 .links a.links__primary:hover {
   opacity: 0.88;
 }
+.links li {
+  display: flex;
+}
+.links a.links__icon {
+  padding: 0.42rem 0.7rem;
+}
 .links__pending {
   display: inline-flex;
   align-items: center;

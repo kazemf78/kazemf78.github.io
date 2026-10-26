@@ -18,11 +18,11 @@ export const education = [
 // Newest first. Plain HTML allowed in `text`. Set to [] to hide the section.
 export const news = [
   {
-    date: '2026',
+    date: 'Apr 2026',
     text: '<em>Your LLM Agents are Temporally Blind</em> accepted to Findings of ACL 2026.',
   },
   {
-    date: '2025',
+    date: 'Aug 2025',
     text: '<em>Tool Preferences in Agentic LLMs are Unreliable</em> accepted to the EMNLP 2025 Main Conference.',
   },
   {
