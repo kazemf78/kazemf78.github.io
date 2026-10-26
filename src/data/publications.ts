@@ -1,4 +1,5 @@
-// Publications, newest first. To add a paper, copy an entry and edit it.
+// Publications, newest first: accepted papers by acceptance date, preprints by
+// arXiv posting date. To add a paper, copy an entry and edit it.
 //
 // - authors: list names as they appear on the paper. Your own name is
 //   highlighted automatically (see `me` below). Append '*' for equal contribution.
@@ -49,14 +50,6 @@ export const publications: Publication[] = [
     links: { arxiv: 'https://arxiv.org/abs/2605.11418', code: 'https://github.com/ShoumikSaha/agent-skill-security' },
   },
   {
-    title: 'Quantifying Document Impact in RAG-LLMs',
-    authors: ['A Gerami', 'K Faghih', 'R Duraiswami'],
-    venue: 'arXiv',
-    year: 2026,
-    status: 'preprint',
-    links: { arxiv: 'https://arxiv.org/abs/2601.05260' },
-  },
-  {
     title:
       'Your LLM Agents are Temporally Blind: The Misalignment Between Tool Use Decisions and Human Time Perception',
     authors: ['Y Cheng*', 'A S Moakhar*', 'C Fan*', 'P Hosseini', 'K Faghih', 'Z Sodagar', 'W Wang', 'S Feizi'],
@@ -69,6 +62,14 @@ export const publications: Publication[] = [
       arxiv: 'https://arxiv.org/abs/2510.23853',
       code: 'https://github.com/chengez/TicToc',
     },
+  },
+  {
+    title: 'Quantifying Document Impact in RAG-LLMs',
+    authors: ['A Gerami', 'K Faghih', 'R Duraiswami'],
+    venue: 'arXiv',
+    year: 2026,
+    status: 'preprint',
+    links: { arxiv: 'https://arxiv.org/abs/2601.05260' },
   },
   {
     title: 'Tool Preferences in Agentic LLMs are Unreliable',
