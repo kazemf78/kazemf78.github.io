@@ -84,6 +84,5 @@ export const publications: Publication[] = [
       arxiv: 'https://arxiv.org/abs/2505.18135',
       code: 'https://github.com/kazemf78/llm-unreliable-tool-preferences',
     },
-    note: 'Shows that surface-level edits to tool descriptions can raise selection probability by more than 20× in some settings.',
   },
 ];
