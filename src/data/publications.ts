@@ -30,15 +30,7 @@ export const publications: Publication[] = [
     year: 2026,
     status: 'preprint',
     selected: true,
-    // TODO: add the arXiv link, e.g. links: { arxiv: 'https://arxiv.org/abs/XXXX.XXXXX' },
-  },
-  {
-    title: 'Under the Hood of SKILL.md: Semantic Supply-Chain Attacks on AI Agent Skill Registry',
-    authors: ['S Saha', 'K Faghih', 'S Feizi'],
-    venue: 'arXiv',
-    year: 2026,
-    status: 'preprint',
-    links: { arxiv: 'https://arxiv.org/abs/2605.11418' },
+    links: { arxiv: 'https://arxiv.org/abs/2610.24957', code: 'https://github.com/kazemf78/access-eval' },
   },
   {
     title: 'Same Question, Different Answers: Evaluating LLM Reliability Beyond Accuracy',
@@ -46,7 +38,23 @@ export const publications: Publication[] = [
     venue: 'arXiv',
     year: 2026,
     status: 'preprint',
-    links: { arxiv: 'https://arxiv.org/abs/2607.22554' },
+    links: { arxiv: 'https://arxiv.org/abs/2607.22554', code: 'https://github.com/kazemf78/llm-consistency-study' },
+  },
+  {
+    title: 'Under the Hood of SKILL.md: Semantic Supply-Chain Attacks on AI Agent Skill Registry',
+    authors: ['S Saha', 'K Faghih', 'S Feizi'],
+    venue: 'arXiv',
+    year: 2026,
+    status: 'preprint',
+    links: { arxiv: 'https://arxiv.org/abs/2605.11418', code: 'https://github.com/ShoumikSaha/agent-skill-security' },
+  },
+  {
+    title: 'Quantifying Document Impact in RAG-LLMs',
+    authors: ['A Gerami', 'K Faghih', 'R Duraiswami'],
+    venue: 'arXiv',
+    year: 2026,
+    status: 'preprint',
+    links: { arxiv: 'https://arxiv.org/abs/2601.05260' },
   },
   {
     title:
@@ -56,15 +64,11 @@ export const publications: Publication[] = [
     year: 2026,
     status: 'published',
     selected: true,
-    links: { paper: 'https://aclanthology.org/2026.findings-acl.1848/' },
-  },
-  {
-    title: 'Quantifying Document Impact in RAG-LLMs',
-    authors: ['A Gerami', 'K Faghih', 'R Duraiswami'],
-    venue: 'arXiv',
-    year: 2026,
-    status: 'preprint',
-    links: { arxiv: 'https://arxiv.org/abs/2601.05260' },
+    links: {
+      paper: 'https://aclanthology.org/2026.findings-acl.1848/',
+      arxiv: 'https://arxiv.org/abs/2510.23853',
+      code: 'https://github.com/chengez/TicToc',
+    },
   },
   {
     title: 'Tool Preferences in Agentic LLMs are Unreliable',
@@ -76,6 +80,7 @@ export const publications: Publication[] = [
     selected: true,
     links: {
       paper: 'https://aclanthology.org/2025.emnlp-main.1060/',
+      arxiv: 'https://arxiv.org/abs/2505.18135',
       code: 'https://github.com/kazemf78/llm-unreliable-tool-preferences',
     },
     note: 'Shows that surface-level edits to tool descriptions can raise selection probability by more than 20× in some settings.',
