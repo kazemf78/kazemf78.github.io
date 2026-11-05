@@ -16,9 +16,8 @@ export const profile = {
   photo: '/images/profile.jpg',
 
   // Path under /public (e.g. '/cv.pdf') or a full URL. While empty, the CV button
-  // shows as a "coming soon" placeholder.
-  // TODO: add a website-safe CV (no phone number) at public/cv.pdf and set this to '/cv.pdf'.
-  cv: '',
+  // shows as a "coming soon" placeholder. Keep the public copy free of your phone number.
+  cv: '/cv.pdf',
 
   links: {
     email: 'kazemf@umd.edu',
