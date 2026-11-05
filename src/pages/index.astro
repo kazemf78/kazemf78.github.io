@@ -75,7 +75,7 @@ const updated = new Date().toLocaleDateString('en-US', { month: 'long', year: 'n
           )}
           <li>
             {profile.cv ? (
-              <a class="links__primary" href={profile.cv}><Icon name="cv" /><span>CV</span></a>
+              <a href={profile.cv}><Icon name="cv" /><span>CV</span></a>
             ) : (
               <span class="links__pending" aria-disabled="true" title="Public CV coming soon">
                 <Icon name="cv" /><span>CV (soon)</span>

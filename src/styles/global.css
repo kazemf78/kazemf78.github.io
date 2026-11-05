@@ -310,17 +310,6 @@ strong {
 .links a:hover {
   border-color: var(--faint);
 }
-.links a.links__primary {
-  background: var(--text);
-  border-color: var(--text);
-  color: var(--bg);
-}
-.links a.links__primary .icon {
-  color: var(--bg);
-}
-.links a.links__primary:hover {
-  opacity: 0.88;
-}
 .links li {
   display: flex;
 }
